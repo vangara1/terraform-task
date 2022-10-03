@@ -3,5 +3,5 @@ output "vpc_public_subnets" {
 }
 
 output "iam_role" {
-  value = module.iam_role.name
+  value = module.iam_role.*.id
 }

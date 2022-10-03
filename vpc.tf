@@ -13,7 +13,7 @@ module "vpc" {
 }
 
 
-module "vpc" {
+module "nat-gateway" {
   source              = "terraform-aws-modules/vpc/aws"
   enable_nat_gateway  = true
   single_nat_gateway  = false

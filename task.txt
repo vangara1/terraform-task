@@ -16,6 +16,6 @@ create ec2 instance in the above created VPC and add the key generated.
  Terraform Task : Create a terraform code to do the following activities.
 1. Create IAM policy to get the s3 bucket full access.
 2. create ROLE and attach the above create IAM policy.
-3. Create an EC2 instance and attach the ROLE to it.
-4. Create a S3 bucket and enable versioning,life cycle policies to it.
-5. attach s3 bucket as mount point to EC2 instance.
+3. Create an EC2 instance and attach the ROLE to it. ?
+4. Create a S3 bucket and enable versioning,life cycle policies to it. ?
+5. attach s3 bucket as mount point to EC2 instance. ?

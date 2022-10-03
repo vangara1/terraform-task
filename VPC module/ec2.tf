@@ -12,23 +12,9 @@ module "ec2_instance" {
   instance_type                       = var.instance_type
   key_name                            = var.NAME
   monitoring                          = true
-#  vpc_security_group_ids              = [module.sg.security_group_id]
+  vpc_security_group_ids              = [module.sg.security_group_id]
   subnet_id                           = module.vpc.public_subnets[0]
-  security_group_rules = [
-    {
-      type        = "egress"
-      from_port   = 0
-      to_port     = 65535
-      protocol    = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
-    },
-    {
-      type        = "ingress"
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
-    }]
+#  role                                = module.iam_role.id
 
   tags = {
     name = var.NAME

@@ -28,7 +28,7 @@ module "ec2_instance" {
       to_port     = 0
       protocol    = "-1"
       cidr_blocks = ["0.0.0.0/0"]
-    },
+    }]
 
   tags = {
     name = var.NAME

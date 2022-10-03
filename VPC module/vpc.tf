@@ -22,6 +22,5 @@ resource "aws_eip" "nat" {
 
 
 
-  enable_nat_gateway = var.vpc_enable_nat_gateway
 
 

@@ -6,12 +6,16 @@ module "sg" {
   vpc_id      = module.vpc.vpc_id
 
   ingress_cidr_blocks      = ["190.0.0.0/16"]
-  ingress_rules = ["All traffic"]
-}
-#  ingress_with_cidr_blocks =
-#    {
-#      rule        = "All traffic"
-#      cidr_blocks = "0.0.0.0/0"
-#    }
-#
-#}
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 0
+      to_port     = 0
+      protocol    = "tcp"
+      description = ""
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      rule        = "All traffic"
+      cidr_blocks = "0.0.0.0/0"
+    },
+  ]

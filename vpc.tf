@@ -5,7 +5,7 @@ module "vpc" {
   cidr = var.CIDR
 
   azs                = var.AZ
-  subnets            = var.SUBNET
+  public_subnets    = var.SUBNET
   enable_nat_gateway = true
   enable_vpn_gateway = true
 

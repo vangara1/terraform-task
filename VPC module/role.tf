@@ -14,3 +14,7 @@ module "iam_role" {
   custom_role_policy_arns = [module.iam_policy.id]
   number_of_custom_role_policy_arns = 1
 }
+resource "aws_iam_instance_profile" "test_profile" {
+  name = "test_profile"
+  role = module.iam_role.id
+}

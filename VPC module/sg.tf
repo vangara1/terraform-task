@@ -14,9 +14,5 @@ module "sg" {
       description = ""
       cidr_blocks = "0.0.0.0/0"
     },
-    {
-      rule        = "All traffic"
-      cidr_blocks = "0.0.0.0/0"
-    },
   ]
 }

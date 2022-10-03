@@ -1,5 +1,6 @@
 module "vpc" {
-  source  = "terraform-google-modules/network/google//modules/subnets"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "3.14.0"
 
   name = var.NAME
   cidr = var.CIDR
@@ -18,3 +19,9 @@ resource "aws_eip" "nat" {
     name = var.NAME
   }
 }
+
+
+
+  enable_nat_gateway = var.vpc_enable_nat_gateway
+
+

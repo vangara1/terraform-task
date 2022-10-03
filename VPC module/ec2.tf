@@ -19,3 +19,5 @@ module "ec2_instance" {
     name = var.NAME
   }
 }
+
+

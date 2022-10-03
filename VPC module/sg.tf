@@ -9,6 +9,6 @@ module "sg" {
     {
       rule        = "All traffic"
       cidr_blocks = "0.0.0.0/0"
-    },
+    }
   ]
 }

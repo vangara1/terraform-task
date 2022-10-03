@@ -9,7 +9,7 @@ module "vpc" {
   public_subnets     = var.SUBNET
   enable_nat_gateway = true
   enable_vpn_gateway = true
-  enable_nat_gateway = true
+
 
 }
 
@@ -21,11 +21,11 @@ module "vpc" {
 #  reuse_nat_ips       = true
 #  external_nat_ip_ids = "${aws_eip.nat.*.id}"
 #}
-#
-#resource "aws_eip" "nat" {
-#  count = 1
-#  vpc   = true
-#  tags  = {
-#    name = var.NAME
-#  }
-#}
+
+resource "aws_eip" "nat" {
+  count = 1
+  vpc   = true
+  tags  = {
+    name = var.NAME
+  }
+}

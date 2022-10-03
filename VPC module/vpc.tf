@@ -9,7 +9,6 @@ module "vpc" {
   public_subnets     = var.SUBNET
   enable_nat_gateway = true
   enable_vpn_gateway = true
-  public_dns         = true
 
 }
 resource "aws_eip" "nat" {

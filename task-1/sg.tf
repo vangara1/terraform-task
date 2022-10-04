@@ -1,7 +1,7 @@
 module "sg" {
   source = "terraform-aws-modules/security-group/aws"
 
-  name   = var.NAME
+  name   = "${var.NAME}-sg"
   vpc_id = module.vpc.vpc_id
 
   ingress_cidr_blocks      = ["190.0.0.0/16"]

@@ -1,7 +1,7 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name               = var.NAME
+  name               = "${var.NAME}-vpc"
   cidr               = var.CIDR
   azs                = var.AZ
   private_subnets    = var.PVT-SUBNET
@@ -14,7 +14,7 @@ resource "aws_eip" "elastic-ip" {
   count = 1
   vpc   = true
   tags  = {
-    name = var.NAME
+    name = "${var.NAME}-eip"
   }
 }
 

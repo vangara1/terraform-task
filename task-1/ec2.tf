@@ -17,7 +17,7 @@ module "ec2_instance" {
 
 
   tags = {
-    name = var.NAME
+    name = "${var.NAME}-ec2"
   }
 }
 

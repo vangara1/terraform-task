@@ -15,6 +15,6 @@ module "iam_role" {
 }
 
 resource "aws_iam_role_policy_attachment" "wave-role" {
-  role       = module.iam_role.arn
-  policy_arn = module.iam_policy.arn
+  role       = module.iam_role.iam_role_arn
+  policy_arn = module.iam_policy.iam_policy_arn
 }

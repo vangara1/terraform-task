@@ -17,7 +17,7 @@ resource "kubernetes_storage_class" "storage" {
   metadata {
     name = "storage"
   }
-  storage_provisioner =  "kubernetes.io/gce-pd"
+  storage_provisioner = "ebs.csi.aws.com"
   reclaim_policy      = "Retain"
   parameters = {
     type = "gp3"
@@ -27,6 +27,7 @@ resource "kubernetes_storage_class" "storage" {
   allow_volume_expansion = true
   volume_binding_mode = "Immediate"
 }
+
 
 #
 #resource "null_resource" "k8s_storage_class_patch" {

@@ -15,7 +15,9 @@ module "ec2_instance" {
   vpc_security_group_ids              = [module.sg.security_group_id]
   subnet_id                           = module.vpc.public_subnets[0]
 
-
+  tags  = {
+    name = "${var.NAME}-ec2"
+  }
 }
 
 

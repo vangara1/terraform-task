@@ -14,6 +14,6 @@ module "efs" {
 
   name                    = var.NAME
   allowed_security_groups = [module.sg.security_group_id]
-  subnets                 =  module.vpc.public_subnets_id
+  subnets                 =  module.vpc.aws_subnet
   vpc_id                  = module.vpc.vpc_id
 }

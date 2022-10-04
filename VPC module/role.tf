@@ -66,6 +66,6 @@ EOF
 
 resource "aws_iam_policy_attachment" "attachment" {
   name       = "${var.NAME}-attachment"
-  roles      = [aws_iam_role.wave-role.name]
-  policy_arn = aws_iam_policy.wave-policy.arn
+  roles      = [aws_iam_role.role.name]
+  policy_arn = aws_iam_policy.policy.arn
 }

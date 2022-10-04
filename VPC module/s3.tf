@@ -23,7 +23,7 @@
 #
 
 resource "aws_s3_bucket" "wave-bucket" {
-  bucket = "${var.NAME}-bucket"
+  bucket = "wave-cycle-terrafrom-test-bucket"
 }
 
 resource "aws_s3_bucket_acl" "wave-acl" {

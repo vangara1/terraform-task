@@ -42,10 +42,11 @@ resource "aws_s3_bucket_lifecycle_configuration" "wave-lifecycle" {
   bucket = aws_s3_bucket.wave-bucket.id
 
   rule {
-            expiration = {
-              days = var.day
-            }
-          }
+    id = var.NAME
+
+    expiration {
+      days = var.day
+    }
 
 
     status = "Enabled"

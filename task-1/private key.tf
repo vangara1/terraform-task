@@ -1,12 +1,12 @@
 resource "tls_private_key" "wave" {
-algorithm = "RSA"
+  algorithm = "RSA"
 }
 
 module "key_pair" {
-source = "terraform-aws-modules/key-pair/aws"
+  source = "terraform-aws-modules/key-pair/aws"
 
-key_name = var.NAME
-public_key = trimspace(tls_private_key.wave.public_key_openssh)
+  key_name   = var.NAME
+  public_key = trimspace(tls_private_key.wave.public_key_openssh)
 }
 
 resource "null_resource" "key-wave" {

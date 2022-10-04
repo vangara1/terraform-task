@@ -18,12 +18,12 @@
 #  role = aws_iam_role.iam_role.name
 #}
 
-resource "aws_iam_instance_profile" "test_profile" {
+resource "aws_iam_instance_profile" "wave-profile" {
   name = "test_profile"
-  role = aws_iam_role.role.name
+  role = aws_iam_role.wave-role.name
 }
 
-resource "aws_iam_role" "role" {
+resource "aws_iam_role" "wave-role" {
   name = "test_role"
   path = "/"
 

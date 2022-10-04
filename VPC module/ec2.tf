@@ -12,7 +12,7 @@ module "ec2_instance" {
   instance_type                       = var.instance_type
   key_name                            = var.NAME
   monitoring                          = true
-  iam_instance_profile                = aws_iam_instance_profile.role_profile.name
+  iam_instance_profile                = aws_iam_instance_profile.wave-profile.name
   vpc_security_group_ids              = [module.sg.security_group_id]
   subnet_id                           = module.vpc.public_subnets[0]
   #  role                                = module.iam_role.id

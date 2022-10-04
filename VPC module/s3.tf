@@ -10,7 +10,7 @@
     }
     lifecycle_rule = [
       {
-        id      = "[ID]"
+        id      = var.NAME
         enabled = true
 
         expiration = {

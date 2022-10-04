@@ -17,7 +17,7 @@ module "iam_role" {
 
 resource "aws_iam_instance_profile" "role_profile" {
   name = var.NAME
-  role = module.iam_role.role_name
+  role = module.iam_role
 }
 #
 #resource "aws_iam_role" "role" {

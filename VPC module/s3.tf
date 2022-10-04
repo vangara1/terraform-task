@@ -40,15 +40,11 @@ resource "aws_s3_bucket_versioning" "wave-versioning" {
 
 resource "aws_s3_bucket_lifecycle_configuration" "wave-lifecycle" {
   bucket = aws_s3_bucket.wave-bucket.id
-
   rule {
-    id = var.NAME
-
+    id = "${var.NAME}-id"
     expiration {
       days = var.day
     }
-
-
     status = "Enabled"
   }
 }

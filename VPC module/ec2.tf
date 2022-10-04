@@ -16,7 +16,7 @@ module "ec2_instance" {
   subnet_id                           = module.vpc.public_subnets[0]
 
   tags = {
-    name = var.NAME
+    name = "${var.NAME}-ec2"
   }
 }
 

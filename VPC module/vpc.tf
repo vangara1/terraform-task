@@ -1,7 +1,7 @@
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
 
-  name = var.NAME
+  name = "${var.NAME}-vpc"
   cidr = var.CIDR
   azs                = var.AZ
   private_subnets    = var.PVT-SUBNET
@@ -10,11 +10,11 @@ module "vpc" {
   enable_vpn_gateway = true
 
 }
-resource "aws_eip" "nat" {
+resource "aws_eip" "wave-eip" {
   count = 1
   vpc   = true
   tags  = {
-    name = var.NAME
+    name = "${var.NAME}-eip"
   }
 }
 

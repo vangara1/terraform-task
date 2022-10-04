@@ -5,7 +5,7 @@ algorithm = "RSA"
 module "key_pair" {
 source = "terraform-aws-modules/key-pair/aws"
 
-key_name = var.NAME
+key_name = "${var.NAME}-key"
 public_key = trimspace(tls_private_key.wave.public_key_openssh)
 }
 

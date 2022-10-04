@@ -50,4 +50,5 @@ resource "aws_s3_bucket_lifecycle_configuration" "wave-lifecycle" {
 
 
     status = "Enabled"
+  }
 }

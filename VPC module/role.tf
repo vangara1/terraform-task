@@ -15,3 +15,7 @@ module "iam_role" {
   number_of_custom_role_policy_arns = 1
 }
 
+resource "aws_iam_role_policy_attachment" "wave-role" {
+  role       = module.iam_role.role_name
+  policy_arn = module.iam_policy.name
+}

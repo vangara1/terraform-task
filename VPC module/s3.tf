@@ -23,18 +23,14 @@
 #
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "wave-cycle-terrafrom-test-bucket"
-  tags = {
-    name = "${var.NAME}-bucket"
-  }
+  bucket = "wave-cycle-terraform-test-bucket"
+
 }
 
 resource "aws_s3_bucket_acl" "acl" {
   bucket = aws_s3_bucket.bucket.id
   acl    = "private"
-  tags = {
-    name = "${var.NAME}-acl"
-  }
+
 }
 
 resource "aws_s3_bucket_versioning" "versioning" {
@@ -42,9 +38,7 @@ resource "aws_s3_bucket_versioning" "versioning" {
   versioning_configuration {
     status = "Enabled"
   }
-  tags = {
-    name = "${var.NAME}-versioning"
-  }
+
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "lifecycle" {
@@ -56,7 +50,5 @@ resource "aws_s3_bucket_lifecycle_configuration" "lifecycle" {
     }
     status = "Enabled"
   }
-  tags = {
-    name = "${var.NAME}-lifecycle"
-  }
+
 }

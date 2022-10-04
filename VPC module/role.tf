@@ -17,21 +17,29 @@
 #resource "aws_iam_instance_profile" "iam_instance_profile" {
 #  role = aws_iam_role.iam_role.name
 #}
-resource "aws_iam_instance_profile" "role_profile" {
-  name = var.NAME
-  role = aws_iam_role.role.arn
+
+resource "aws_iam_instance_profile" "test_profile" {
+  name = "test_profile"
+  role = aws_iam_role.role.name
 }
 
 resource "aws_iam_role" "role" {
   name = "test_role"
   path = "/"
 
-  create_role = true
-
-  role_name         = var.NAME
-  role_requires_mfa = true
-
-  custom_role_policy_arns = [module.iam_policy.id]
-  number_of_custom_role_policy_arns = 1
-
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*",
+                "s3-object-lambda:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+EOF
 }

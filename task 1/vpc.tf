@@ -10,7 +10,7 @@ module "vpc" {
   enable_vpn_gateway = true
 
 }
-resource "aws_eip" "nat" {
+resource "aws_eip" "elastic-ip" {
   count = 1
   vpc   = true
   tags  = {

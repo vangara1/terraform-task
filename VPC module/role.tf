@@ -13,8 +13,8 @@ module "iam_role" {
   custom_role_policy_arns = [module.iam_policy.id]
   number_of_custom_role_policy_arns = 1
 }
-#
-#resource "aws_iam_role_policy_attachment" "wave-role" {
-#  role       = module.iam_role.role_name
-#  policy_arn = module.iam_policy.name
-#}
+
+resource "aws_iam_role_policy_attachment" "wave-role" {
+  role       = module.iam_role.arn
+  policy_arn = module.iam_policy.arn
+}

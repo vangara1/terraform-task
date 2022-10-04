@@ -22,29 +22,41 @@
 #  }
 #
 
-resource "aws_s3_bucket" "wave-bucket" {
+resource "aws_s3_bucket" "bucket" {
   bucket = "wave-cycle-terrafrom-test-bucket"
-}
-
-resource "aws_s3_bucket_acl" "wave-acl" {
-  bucket = aws_s3_bucket.wave-bucket.id
-  acl    = "private"
-}
-
-resource "aws_s3_bucket_versioning" "wave-versioning" {
-  bucket = aws_s3_bucket.wave-bucket.id
-  versioning_configuration {
-    status = "Enabled"
+  tags = {
+    name = "${var.NAME}-bucket"
   }
 }
 
-resource "aws_s3_bucket_lifecycle_configuration" "wave-lifecycle" {
-  bucket = aws_s3_bucket.wave-bucket.id
+resource "aws_s3_bucket_acl" "acl" {
+  bucket = aws_s3_bucket.bucket.id
+  acl    = "private"
+  tags = {
+    name = "${var.NAME}-acl"
+  }
+}
+
+resource "aws_s3_bucket_versioning" "versioning" {
+  bucket = aws_s3_bucket.bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+  tags = {
+    name = "${var.NAME}-versioning"
+  }
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "lifecycle" {
+  bucket = aws_s3_bucket.bucket.id
   rule {
     id = "${var.NAME}-id"
     expiration {
       days = var.day
     }
     status = "Enabled"
+  }
+  tags = {
+    name = "${var.NAME}-lifecycle"
   }
 }

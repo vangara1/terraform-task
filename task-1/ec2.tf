@@ -1,9 +1,6 @@
 module "ec2_instance" {
   source = "terraform-aws-modules/ec2-instance/aws"
-
-
   name = var.NAME
-
   create_spot_instance                = true
   spot_type                           = var.spot_type
   spot_instance_interruption_behavior = var.spot_behavior

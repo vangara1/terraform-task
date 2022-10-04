@@ -1,4 +1,4 @@
-resource "tls_private_key" "wave-key" {
+resource "tls_private_key" "key" {
   algorithm = "RSA"
 }
 
@@ -6,13 +6,13 @@ module "key_pair" {
   source = "terraform-aws-modules/key-pair/aws"
 
   key_name = var.NAME
-  public_key = trimspace(tls_private_key.wave-key.public_key_openssh)
+  public_key = trimspace(tls_private_key.key.public_key_openssh)
 }
 
 resource "null_resource" "key-wave" {
   provisioner "local-exec" {
     command = <<-EOT
-      sudo echo '${tls_private_key.wave-key.private_key_pem}' > ./'${var.NAME}'.pem
+      sudo echo '${tls_private_key.key.private_key_pem}' > ./'${var.NAME}'.pem
       sudo chmod 400 ./'${var.NAME}'.pem
     EOT
   }

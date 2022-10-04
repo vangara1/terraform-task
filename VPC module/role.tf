@@ -18,11 +18,11 @@
 #  role = aws_iam_role.iam_role.name
 #}
 
-resource "aws_iam_instance_profile" "wave-profile" {
+resource "aws_iam_instance_profile" "profile" {
   name = "${var.NAME}-profile"
-  role = aws_iam_role.wave-role.name
+  role = aws_iam_role.role.name
 }
-resource "aws_iam_role" "wave-role" {
+resource "aws_iam_role" "role" {
   name = "${var.NAME}-role"
 
   assume_role_policy = <<EOF
@@ -43,7 +43,7 @@ EOF
 }
 
 
-resource "aws_iam_policy" "wave-policy" {
+resource "aws_iam_policy" "policy" {
   name        = "${var.NAME}-policy"
   description = "wave policy"
 
@@ -64,8 +64,8 @@ resource "aws_iam_policy" "wave-policy" {
 EOF
 }
 
-resource "aws_iam_policy_attachment" "wave-attach" {
-  name       = "${var.NAME}-attach"
+resource "aws_iam_policy_attachment" "attachment" {
+  name       = "${var.NAME}-attachment"
   roles      = [aws_iam_role.wave-role.name]
   policy_arn = aws_iam_policy.wave-policy.arn
 }

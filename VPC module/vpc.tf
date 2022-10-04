@@ -8,9 +8,8 @@ module "vpc" {
   public_subnets     = var.SUBNET
   enable_nat_gateway = true
   enable_vpn_gateway = true
-
 }
-resource "aws_eip" "wave-eip" {
+resource "aws_eip" "eip" {
   count = 1
   vpc   = true
   tags  = {

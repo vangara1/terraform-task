@@ -19,13 +19,33 @@
 #}
 
 resource "aws_iam_instance_profile" "wave-profile" {
-  name = "test_profile"
+  name = "${var.NAME}-profile"
   role = aws_iam_role.wave-role.name
 }
-
 resource "aws_iam_role" "wave-role" {
-  name = "test_role"
-  path = "/"
+  name = "${var.NAME}-role"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
+
+resource "aws_iam_policy" "wave-policy" {
+  name        = "${var.NAME}-policy"
+  description = "wave policy"
 
   policy = <<EOF
 {
@@ -42,4 +62,10 @@ resource "aws_iam_role" "wave-role" {
     ]
 }
 EOF
+}
+
+resource "aws_iam_policy_attachment" "wave-attach" {
+  name       = "${var.NAME}-attach"
+  roles      = [aws_iam_role.wave-role.name]
+  policy_arn = aws_iam_policy.wave-policy.arn
 }

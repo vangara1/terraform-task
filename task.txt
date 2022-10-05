@@ -12,7 +12,7 @@ Task 2:
 3. use the pvc in mysql or mariadb and deploy the stateful set in k8.
 
 Task 3:
-1. Down load the repo
+1. Download the repo
    https://github.com/spring-projects/spring-petclinic.git
 2. create a Dockerfile to build docker image
 3. create a repo in dockhub

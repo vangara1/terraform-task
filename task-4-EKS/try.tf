@@ -25,17 +25,17 @@ module "eks" {
     }
   ]
 
-  vpc_id     = "vpc-1234556abcdef"
-  subnet_ids = ["subnet-abcde012", "subnet-bcde012a", "subnet-fghi345a"]
+  vpc_id     = "vpc-078a65ec215c92579"
+  subnet_ids = ["subnet-030df7dab2d6b949e", "subnet-010829c9635538dae", "subnet-0190523e034fc3be0"]
 
   # Self Managed Node Group(s)
-  self_managed_node_group_defaults = {
-    instance_type                          = "m6i.large"
-    update_launch_template_default_version = true
-    iam_role_additional_policies           = [
-      "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-    ]
-  }
+#  self_managed_node_group_defaults = {
+#    instance_type                          = "m6i.large"
+#    update_launch_template_default_version = true
+#    iam_role_additional_policies           = [
+#      "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+#    ]
+#  }
 
   self_managed_node_groups = {
     one = {
@@ -51,16 +51,7 @@ module "eks" {
           spot_allocation_strategy                 = "capacity-optimized"
         }
 
-        override = [
-          {
-            instance_type     = "m5.large"
-            weighted_capacity = "1"
-          },
-          {
-            instance_type     = "m6i.large"
-            weighted_capacity = "2"
-          },
-        ]
+
       }
     }
   }

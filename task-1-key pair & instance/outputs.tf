@@ -1,5 +1,5 @@
 output "key_pair" {
-  value       = module.key_pair.public_key
+  value       = module.key_pair.public_key_pem
 }
 
 

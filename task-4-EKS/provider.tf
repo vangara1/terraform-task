@@ -11,3 +11,8 @@ terraform {
 provider "aws" {
   region = "us-east-1"
 }
+
+provider "kubernetes" {
+  config_path = ".kube_config.yaml"
+  version = "~> 1.9"
+}

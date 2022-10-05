@@ -1,11 +1,8 @@
-provider "kubernetes" {
-  config_path = ".kube_config.yaml"
-  version = "~> 1.9"
-}
 
-resource "kubernetes_storage_class" "example" {
+
+resource "kubernetes_storage_class" "ksc-try" {
   metadata {
-    name = "terraform-example"
+    name = "terraform-ksc-try"
   }
   storage_provisioner = "kubernetes.io/gce-pd"
   reclaim_policy      = "Retain"

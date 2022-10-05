@@ -21,7 +21,7 @@ module "eks" {
     one = {
       name = "${var.NAME}-group-1"
 
-      instance_types = var.instance_type
+      instance_types = ["t3.small"]
 
       min_size     = 1
       max_size     = 3
@@ -39,7 +39,7 @@ module "eks" {
     two = {
       name = "${var.NAME}-group-2"
 
-      instance_types = var.instance_type
+      instance_types = ["t3.medium"]
 
       min_size     = 1
       max_size     = 2

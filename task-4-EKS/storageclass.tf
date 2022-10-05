@@ -1,13 +1,10 @@
-resource "kubernetes_storage_class" "standard" {
+resource "kubernetes_storage_class" "example" {
   metadata {
-    name = "local"
-    annotations = {
-      "storageclass.kubernetes.io/is-default-class" = "true"
-    }
+    name = "local-terra-style-example"
   }
-  storage_provisioner = "kubernetes.io/aws-ebs"
-  parameters {
-    type      = "gp2"
-    encrypted = "true"
+  storage_provisioner = "kubernetes.io/gce-pd"
+  reclaim_policy      = "Retain"
+  parameters = {
+    type = "pd-standard"
   }
 }

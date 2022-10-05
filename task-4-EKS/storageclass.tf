@@ -1,11 +1,13 @@
-resource "kubernetes_storage_class" "example" {
+resource "kubernetes_storage_class" "standard" {
   metadata {
-    name = "terraform-example"
+    name = "local"
+    annotations = {
+      "storageclass.kubernetes.io/is-default-class" = "true"
+    }
   }
-  storage_provisioner = "kubernetes.io/gce-pd"
-  reclaim_policy      = "Retain"
-  parameters = {
-    type = "pd-standard"
+  storage_provisioner = "kubernetes.io/aws-ebs"
+  parameters {
+    type      = "gp2"
+    encrypted = "true"
   }
-  mount_options = ["file_mode=0700", "dir_mode=0777", "mfsymlinks", "uid=1000", "gid=1000", "nobrl", "cache=none"]
 }

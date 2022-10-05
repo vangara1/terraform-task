@@ -1,8 +1,6 @@
-
-
-resource "kubernetes_storage_class" "ksc-try" {
+resource "kubernetes_storage_class" "example" {
   metadata {
-    name = "terraform-ksc-try"
+    name = "terraform-example"
   }
   storage_provisioner = "kubernetes.io/gce-pd"
   reclaim_policy      = "Retain"

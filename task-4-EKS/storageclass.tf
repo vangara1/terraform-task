@@ -1,13 +1,66 @@
-resource "kubernetes_storage_class" "standard" {
+#resource "kubernetes_storage_class" "standard" {
+#  metadata {
+#    name = "local"
+#    annotations = {
+#      "storageclass.kubernetes.io/is-default-class" = "true"
+#    }
+#  }
+#  storage_provisioner = "kubernetes.io/aws-ebs"
+#  parameters  = {
+#    type      = "gp2"
+#    encrypted = "true"
+#  }
+#}
+
+resource "kubernetes_pod" "test" {
   metadata {
-    name = "local"
-    annotations = {
-      "storageclass.kubernetes.io/is-default-class" = "true"
-    }
+    name = "terraform-example"
   }
-  storage_provisioner = "kubernetes.io/aws-ebs"
-  parameters  = {
-    type      = "gp2"
-    encrypted = "true"
+
+  spec {
+    container {
+      image = "nginx:1.21.6"
+      name  = "example"
+
+      env {
+        name  = "environment"
+        value = "test"
+      }
+
+      port {
+        container_port = 80
+      }
+
+      liveness_probe {
+        http_get {
+          path = "/"
+          port = 80
+
+          http_header {
+            name  = "X-Custom-Header"
+            value = "Awesome"
+          }
+        }
+
+        initial_delay_seconds = 3
+        period_seconds        = 3
+      }
+    }
+
+    dns_config {
+      nameservers = ["1.1.1.1", "8.8.8.8", "9.9.9.9"]
+      searches    = ["example.com"]
+
+      option {
+        name  = "ndots"
+        value = 1
+      }
+
+      option {
+        name = "use-vc"
+      }
+    }
+
+    dns_policy = "None"
   }
 }

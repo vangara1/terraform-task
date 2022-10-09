@@ -13,7 +13,7 @@ terraform {
 
 provider "kubernetes" {
   config_path    = "~/.kube/config"
-  config_context = "my-context"
+  config_context = "kubernetes-admin@kubernetes"
 }
 
 resource "kubernetes_namespace" "example" {

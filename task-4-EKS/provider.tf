@@ -16,12 +16,7 @@ provider "kubernetes" {
   config_context = "kubernetes-admin@kubernetes"
 }
 
-#resource "kubernetes_namespace" "example" {
-#  metadata {
-#    name = "default"
-#  }
-#}
-# Configure the AWS Provider
+
 provider "aws" {
   region = "us-east-1"
 }

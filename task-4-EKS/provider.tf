@@ -12,10 +12,14 @@ terraform {
 }
 
 provider "kubernetes" {
-  config_paths = [
-    "/path/to/config_a.yaml",
-    "/path/to/config_b.yaml"
-  ]
+  config_path    = "~/.kube/config"
+  config_context = "my-context"
+}
+
+resource "kubernetes_namespace" "example" {
+  metadata {
+    name = "default"
+  }
 }
 # Configure the AWS Provider
 provider "aws" {

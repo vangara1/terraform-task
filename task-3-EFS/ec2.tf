@@ -3,9 +3,9 @@ module "ec2_instance" {
 
 
   name                                = "${var.NAME}-ec2"
-  create_spot_instance                = true
-  spot_type                           = var.spot_type
-  spot_instance_interruption_behavior = var.spot_behavior
+#  create_spot_instance                = true
+#  spot_type                           = var.spot_type
+#  spot_instance_interruption_behavior = var.spot_behavior
   associate_public_ip_address         = true
   key_name                            = tls_private_key.key.public_key_openssh
   ami                                 = var.ami

@@ -15,7 +15,7 @@ resource "aws_key_pair" "key_pair" {
 
   provisioner "local-exec" {
     command = <<-EOT
-      sudo echo '${tls_private_key.key.public_key_openssh}' > ./'${var.key_name}'.pem
+      sudo echo '${tls_private_key.key.private_key_pem}' > ./'${var.key_name}'.pem
       sudo chmod 400 ./'${var.key_name}'.pem
     EOT
   }

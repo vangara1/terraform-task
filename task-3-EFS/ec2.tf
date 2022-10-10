@@ -17,6 +17,11 @@ module "ec2_instance" {
   tags = {
     name = "${var.NAME}-ec2"
   }
+  provisioner "local-exec" {
+    command = <<-EOT
+       sudo yum install ec2-instance-connect
+    EOT
+  }
 }
 
 

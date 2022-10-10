@@ -17,10 +17,10 @@ module "ec2_instance" {
   tags = {
     name = "${var.NAME}-ec2"
   }
-  user_data = <<EOF
-  #!/bin/bash
-  sudo yum install ec2-instance-connect
-    EOF
+#  user_data = <<EOF
+#  #!/bin/bash
+#  sudo yum install ec2-instance-connect
+#    EOF
   }
 
 

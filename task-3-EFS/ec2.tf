@@ -7,7 +7,7 @@ module "ec2_instance" {
   spot_type                           = var.spot_type
   spot_instance_interruption_behavior = var.spot_behavior
   associate_public_ip_address         = true
-  key_name                            = tls_private_key.key.public_key_openssh
+  key_name                            = aws_key_pair.key_pair.public_key
   ami                                 = var.ami
   instance_type                       = var.instance_type
   monitoring                          = true

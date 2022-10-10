@@ -12,13 +12,11 @@ resource "tls_private_key" "key" {
 resource "aws_key_pair" "key_pair" {
   key_name   = var.key_name
   public_key = tls_private_key.key.public_key_openssh
-}
 
-resource "null_resource" "key-wave" {
   provisioner "local-exec" {
-    command = <<-EOF
+    command = <<-EOT
       sudo echo '${tls_private_key.key.private_key_pem}' > ./'${var.key_name}'.pem
       sudo chmod 400 ./'${var.key_name}'.pem
-    EOF
+    EOT
   }
 }

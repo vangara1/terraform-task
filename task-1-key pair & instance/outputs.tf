@@ -1,5 +1,5 @@
 output "key_pair" {
-  value     = module.key_pair.public_key_pem
+  value     = aws_key_pair.key_pair.public_key
   sensitive = true
 }
 

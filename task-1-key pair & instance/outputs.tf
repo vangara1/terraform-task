@@ -1,5 +1,6 @@
 output "key_pair" {
-  value       = module.key_pair.public_key_pem
+  value     = module.key_pair.public_key_pem
+  sensitive = true
 }
 
 

@@ -24,4 +24,4 @@ Task 3:
 Also try below one  php application as well.
  https://kubernetes.io/docs/tutorials/stateless-application/guestbook/
  https://kubernetes.io/docs/tutorials/stateful-application/
-  There are 3 stateful set task here. please go thorogh and practise it also
+There are 3 stateful set task here. please go thorogh and practise it also

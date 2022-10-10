@@ -11,7 +11,7 @@ module "ec2_instance" {
   ami                                 = var.ami
   instance_type                       = var.instance_type
   monitoring                          = true
-  vpc_security_group_ids              = [module.sg.security_group_id]
+  vpc_security_group_ids              = aws_security_group.sg.id
   subnet_id                           = module.vpc.public_subnets[0]
 
   tags = {

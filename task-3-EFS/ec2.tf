@@ -7,7 +7,7 @@ module "ec2_instance" {
   spot_type                           = var.spot_type
   spot_instance_interruption_behavior = var.spot_behavior
   associate_public_ip_address         = true
-  key_name                            = var.NAME
+  key_name                            = wave
   ami                                 = var.ami
   instance_type                       = var.instance_type
   monitoring                          = true

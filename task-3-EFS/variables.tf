@@ -2,10 +2,10 @@ variable "NAME" {}
 variable "CIDR" {}
 variable "AZ" {}
 variable "SUBNET" {}
-variable "spot_type" {}
+variable"spot_type" {}
 variable "spot_behavior" {}
 variable "ami" {}
-variable "instance_type" {}
+variable"instance_type"{}
 variable "key_name" {
   type        = string
   default     = "terraform-key-pair"

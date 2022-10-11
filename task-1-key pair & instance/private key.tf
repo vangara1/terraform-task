@@ -9,6 +9,8 @@ module "key_pair" {
   public_key = trimspace(tls_private_key.wave-key.public_key_openssh)
 }
 
+
+
 resource "null_resource" "key-wave" {
   provisioner "local-exec" {
     command = <<-EOT

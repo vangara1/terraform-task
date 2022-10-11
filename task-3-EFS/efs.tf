@@ -9,11 +9,11 @@
 #  }
 #}
 #
-module "efs" {
-  source = "rhythmictech/efs-filesystem/aws"
-
-  name                    = var.NAME
-  allowed_security_groups = [module.sg.security_group_id]
-  subnets                 =  module.vpc.public_subnets
-  vpc_id                  = module.vpc.vpc_id
-}
+#module "efs" {
+#  source = "rhythmictech/efs-filesystem/aws"
+#
+#  name                    = var.NAME
+#  allowed_security_groups = [module.sg.security_group_id]
+#  subnets                 =  module.vpc.public_subnets
+#  vpc_id                  = module.vpc.vpc_id
+#}

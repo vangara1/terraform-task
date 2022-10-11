@@ -13,5 +13,12 @@ module "sg" {
       description = ""
       cidr_blocks = "0.0.0.0/0"
     },
+    {
+      from_port   = 2049
+      to_port     = 2049
+      protocol    = "tcp"
+      description = ""
+      cidr_blocks = "0.0.0.0/0"
+    }
   ]
 }

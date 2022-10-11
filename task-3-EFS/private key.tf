@@ -11,8 +11,7 @@ resource "tls_private_key" "key" {
 #}
 resource "aws_key_pair" "key_pair" {
   key_name   = var.key_name
-#  public_key = tls_private_key.key.public_key_openssh
-  public_key = file("/home/centos/.ssh/key_pair.pub")
+  public_key = tls_private_key.key.public_key_openssh
 }
 
 resource "null_resource" "key-wave" {

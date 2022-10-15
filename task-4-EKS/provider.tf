@@ -1,5 +1,14 @@
-provider "aws" {
-  region = "us-east-2"
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = ">= 2.6.1"
+    }
+  }
 }
 terraform {
   required_providers {
@@ -16,45 +25,45 @@ terraform {
   required_version = "~> 1.0"
 }
 
-#terraform {
-#  required_providers {
-#    aws = {
-#      source  = "hashicorp/aws"
-#      version = "~> 4.0"
-#    }
-#    kubernetes = {
-#      source  = "hashicorp/kubernetes"
-#      version = ">= 2.6.1"
-#    }
-#  }
+#provider "kubernetes" {
+#  config_path    = "~/.kube/config"
+#  config_context = " kubernetes-admin@kubernetes"
+#  host                   = module.eks.cluster_endpoint
+#  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
 #}
 
 provider "kubernetes" {
-#  config_path    = "~/.kube/config"
-#  config_context = " kubernetes-admin@kubernetes"
+  #  config_path    = "~/.kube/config"
+  #  config_context = " kubernetes-admin@kubernetes"
 
-    host                   = data.aws_eks_cluster.default.endpoint
-    cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.certificate_authority[0].data)
-    # token                  = data.aws_eks_cluster_auth.default.token
+  host                   = module.eks.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data[0])
+  # token                  = data.aws_eks_cluster_auth.default.token
 
-    exec {
-      api_version = "client.authentication.k8s.io/v1beta1"
-      args        = ["eks", "get-token", "--cluster-name", data.aws_eks_cluster.default.id]
-      command     = "aws"
-    }
+  exec {
+    api_version = "client.authentication.k8s.io/v1beta1"
+    args        = ["eks", "get-token", "--cluster-name", module.eks.id]
+    command     = "aws"
   }
+}
 
 provider "helm" {
   kubernetes {
-    host                   = data.aws_eks_cluster.default.endpoint
-    cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.certificate_authority[0].data)
+    host                   = module.eks.cluster_endpoint
+    cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data[0])
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
-      args        = ["eks", "get-token", "--cluster-name", data.aws_eks_cluster.default.id]
+      args        = ["eks", "get-token", "--cluster-name", module.eks.id]
       command     = "aws"
     }
   }
 }
 
 
+
+
+
+provider "aws" {
+  region = "us-east-2"
+}
 

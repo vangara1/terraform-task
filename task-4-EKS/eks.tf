@@ -12,7 +12,7 @@ module "eks" {
     create_security_group                 = false
   }
   eks_managed_node_groups = {
-      name = "${var.NAME}-${count.index}"
+      name = "wave-node-${count.index}"
       count = 2
       instance_types = ["t3.medium"]
 

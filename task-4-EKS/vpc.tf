@@ -1,6 +1,6 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-
+  version = "3.14.2"
   name               = "${var.NAME}-vpc"
   cidr               = var.CIDR
   azs                = var.AZ
@@ -11,14 +11,17 @@ module "vpc" {
   enable_dns_hostnames = true
   vpc_endpoint_config = []
 
-}
-resource "aws_eip" "elastic-ip" {
-  count = 3
-  vpc   = true
-  tags  = {
-    name = "${var.NAME}-eip"
+  public_subnet_tags = {
+    "kubernetes.io/cluster/${var.NAME}" = "shared"
+    "kubernetes.io/role/elb"                      = 1
+  }
+
+  private_subnet_tags = {
+    "kubernetes.io/cluster/${var.NAME}" = "shared"
+    "kubernetes.io/role/internal-elb"             = 1
   }
 }
+
 
 
 

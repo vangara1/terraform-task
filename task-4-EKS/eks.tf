@@ -19,7 +19,7 @@ module "eks" {
 
   eks_managed_node_groups = {
     one = {
-      name = "${var.NAME}-group"
+      name = "${var.NAME}-group-1"
 
       instance_types = ["t3.small"]
 

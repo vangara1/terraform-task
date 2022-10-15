@@ -9,7 +9,7 @@ module "vpc" {
   enable_nat_gateway = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
-  vpc_endpoint_config = []
+
 
   public_subnet_tags = {
     "kubernetes.io/cluster/${var.NAME}" = "shared"

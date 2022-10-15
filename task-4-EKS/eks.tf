@@ -13,7 +13,8 @@ module "eks" {
   }
   eks_managed_node_groups = {
       name = "wave-node-${count.index}"
-      count = 2
+#      count = 2
+      count = length(module.eks.name)
       instance_types = ["t3.medium"]
 
       min_size     = 2

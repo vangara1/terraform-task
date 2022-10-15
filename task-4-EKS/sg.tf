@@ -10,7 +10,7 @@ module "sg" {
       from_port   = 0
       to_port     = 0
       protocol    = "tcp"
-      description = ""
+      description = "security group"
       cidr_blocks = "0.0.0.0/0"
     },
   ]

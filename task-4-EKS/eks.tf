@@ -12,7 +12,7 @@ module "eks" {
     create_security_group                 = false
   }
   eks_managed_node_groups = {
-      name = "wave-node-${count.index}"
+      name = "eks ${count.index}"
 #      count = 2
       count = length(module.vpc.private_subnets)
       instance_types = ["t3.medium"]

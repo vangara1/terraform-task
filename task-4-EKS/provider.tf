@@ -13,6 +13,9 @@ terraform {
 
 provider "kubernetes" {
   config_path    = "~/.kube/config"
+  host                   = module.eks.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+
 #  config_context = "kubernetes-admin@kubernetes"
 }
 

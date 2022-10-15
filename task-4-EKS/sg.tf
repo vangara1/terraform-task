@@ -12,6 +12,6 @@ module "sg" {
       protocol    = "tcp"
       description = "security group"
       cidr_blocks = "0.0.0.0/0"
-    },
+    }
   ]
 }

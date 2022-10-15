@@ -6,6 +6,7 @@ module "eks" {
   cluster_version                 = "1.22"
   vpc_id                          = module.vpc.vpc_id
   subnet_ids                      = module.vpc.private_subnets
+  node_security_group_id          = module.sg.sg_id
   eks_managed_node_group_defaults = {
     #    ami_type                              = "AL2_x86_64"
     attach_cluster_primary_security_group = true
@@ -18,23 +19,20 @@ module "eks" {
         "t3.medium"
       ]
       min_size               = 1
-      max_size               = 3
-      desired_size           = 2
-      vpc_security_group_ids = [
-        module.sg.security_group_id
-      ]
+      max_size               = 2
+      desired_size           = 1
+      vpc_security_group_ids = [module.sg.security_group_id]
     }
+
     TWO = {
       name           = "${var.NAME}-2"
       instance_types = [
         "t3.medium"
       ]
       min_size               = 1
-      max_size               = 3
-      desired_size           = 2
-      vpc_security_group_ids = [
-        module.sg.security_group_id
-      ]
+      max_size               = 2
+      desired_size           = 1
+      vpc_security_group_ids = [module.sg.security_group_id]
     }
   }
 
@@ -47,14 +45,14 @@ module "eks" {
     },
   ]
 
-  node_security_group_additional_rules = {
-    ingress_allow_access_from_control_plane = {
-      type                          = "ingress"
-      protocol                      = "tcp"
-      from_port                     = 9443
-      to_port                       = 9443
-      source_cluster_security_group = true
-      description                   = "Allow access from control plane to webhook port of AWS load balancer controller"
-    }
-  }
+  #  node_security_group_additional_rules = {
+  #    ingress_allow_access_from_control_plane = {
+  #      type                          = "ingress"
+  #      protocol                      = "tcp"
+  #      from_port                     = 9443
+  #      to_port                       = 9443
+  #      source_cluster_security_group = true
+  #      description                   = "Allow access from control plane to webhook port of AWS load balancer controller"
+  #    }
+  #  }
 }

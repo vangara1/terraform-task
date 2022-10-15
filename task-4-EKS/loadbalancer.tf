@@ -16,7 +16,7 @@ module "aws_load_balancer_controller_irsa_role" {
 
 
 resource "helm_release" "aws_load_balancer_controller" {
-  name = "${var.NAME}-lb-controller"
+  name = "aws-load-balancer-controller"
 
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"

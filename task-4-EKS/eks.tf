@@ -1,7 +1,7 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "18.26.6"
-
+  name                = var.NAME
   cluster_name                    = var.NAME
   cluster_version                 = "1.22"
   vpc_id                          = module.vpc.vpc_id
@@ -12,11 +12,40 @@ module "eks" {
     create_security_group                 = false
   }
   eks_managed_node_groups = {
-    name                   = "${var.NAME}-group"
-    instance_types         = ["t3.small"]
-    min_size               = 1
-    max_size               = 3
-    desired_size           = 2
-    vpc_security_group_ids = [module.sg.security_group_id]
+    one = {
+      name = "${var.NAME}-group-1"
+
+      instance_types = ["t3.small"]
+
+      min_size     = 1
+      max_size     = 3
+      desired_size = 2
+
+      pre_bootstrap_user_data = <<-EOT
+      echo 'foo bar'
+      EOT
+
+      vpc_security_group_ids = [
+        module.sg.security_group_id
+      ]
+    }
+
+    two = {
+      name = "${var.NAME}-group-2"
+
+      instance_types = ["t3.medium"]
+
+      min_size     = 1
+      max_size     = 2
+      desired_size = 1
+
+      pre_bootstrap_user_data = <<-EOT
+      echo 'foo bar'
+      EOT
+
+      vpc_security_group_ids = [
+        module.sg.security_group_id
+      ]
+    }
   }
 }

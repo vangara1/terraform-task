@@ -13,7 +13,7 @@ module "vpc" {
   source              = "Young-ook/spinnaker/aws//modules/spinnaker-aware-aws-vpc"
   version             = "2.3.1"
   name                = var.name
-  tags                = merge(var.tags, module.eks.tags.shared)
+  tags                = merge(var.tags, module.eks.tags)
   azs                 = var.azs
   cidr                = var.cidr
   enable_igw          = var.enable_igw
@@ -37,23 +37,23 @@ module "eks" {
 
 provider "helm" {
   kubernetes {
-    host                   = module.eks.helmconfig.host
-    token                  = module.eks.helmconfig.token
-    cluster_ca_certificate = base64decode(module.eks.helmconfig.ca)
+    host                   = module.eks.helmconfig
+    token                  = module.eks.helmconfig
+    cluster_ca_certificate = base64decode(module.eks.helmconfig)
   }
 }
 
 module "lb-controller" {
   source       = "../../modules/lb-controller"
-  cluster_name = module.eks.cluster.name
+  cluster_name = module.eks.cluster
   oidc         = module.eks.oidc
   tags         = var.tags
   helm = {
-    vars = module.eks.features.fargate_enabled ? {
-      vpcId       = module.vpc.vpc.id
-      clusterName = module.eks.cluster.name
+    vars = module.eks.features ? {
+      vpcId       = module.vpc.vpc
+      clusterName = module.eks.cluster
       } : {
-      clusterName = module.eks.cluster.name
+      clusterName = module.eks.cluster
     }
   }
 }

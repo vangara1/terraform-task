@@ -7,6 +7,7 @@ module "vpc" {
   private_subnets    = var.PVT-SUBNET
   public_subnets     = var.SUBNET
   enable_nat_gateway = true
+  single_nat_gateway   = true
   enable_dns_hostnames = true
 
 }

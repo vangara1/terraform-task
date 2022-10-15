@@ -12,20 +12,29 @@ module "eks" {
     create_security_group                 = false
   }
   eks_managed_node_groups = {
-      name = var.NAME
-      count = 2
-#      count = length(module.vpc.private_subnets)
-      instance_types = ["t3.medium"]
-
-      min_size     = 2
-      max_size     = 10
-      desired_size = 4
-
-
+  ONE = {
+    name = "${var.NAME}-1"
+    instance_types = [
+    "t3.medium"
+  ]
+    min_size = 1
+    max_size = 3
+    desired_size = 2
+    vpc_security_group_ids = [
+    module.sg.security_group_id
+  ]
+  }
+    TWO = {
+      name = "${var.NAME}-2"
+      instance_types = [
+        "t3.medium"
+      ]
+      min_size = 1
+      max_size = 3
+      desired_size = 2
       vpc_security_group_ids = [
         module.sg.security_group_id
       ]
-
-
+    }
   }
 }

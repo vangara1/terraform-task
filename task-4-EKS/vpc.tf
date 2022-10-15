@@ -12,7 +12,7 @@ module "vpc" {
 
 }
 resource "aws_eip" "elastic-ip" {
-  count = 1
+  count = 3
   vpc   = true
   tags  = {
     name = "${var.NAME}-eip"

@@ -18,23 +18,23 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
-    one = {
-      name = "${var.NAME}-group-1"
+    #    one = {
+    name = "${var.NAME}-group-1"
 
-      instance_types = ["t3.small"]
+    instance_types = ["t3.small"]
 
-      min_size     = 1
-      max_size     = 3
-      desired_size = 2
+    min_size     = 1
+    max_size     = 3
+    desired_size = 2
 
-#      pre_bootstrap_user_data = <<-EOT
-#      echo 'foo bar'
-#      EOT
+    #      pre_bootstrap_user_data = <<-EOT
+    #      echo 'foo bar'
+    #      EOT
 
-      vpc_security_group_ids = [
-        module.sg.security_group_id
-      ]
-    }
+    vpc_security_group_ids = [
+      module.sg.security_group_id
+    ]
+  }
 
 #    two = {
 #      name = "${var.NAME}-group-2"
@@ -54,4 +54,3 @@ module "eks" {
 #      ]
 #    }
   }
-}

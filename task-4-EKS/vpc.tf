@@ -1,14 +1,18 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  version = "3.14.2"
+  version = "3.14.3"
+
   name               = "${var.NAME}-vpc"
   cidr               = var.CIDR
   azs                = var.AZ
   private_subnets    = var.PVT-SUBNET
   public_subnets     = var.SUBNET
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
+
   enable_dns_hostnames = true
+  enable_nat_gateway     = true
+  single_nat_gateway     = true
+  enable_dns_hostnames = true
+  enable_dns_support   = true
 
 
   public_subnet_tags = {

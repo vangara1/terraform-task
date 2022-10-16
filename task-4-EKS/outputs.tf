@@ -10,7 +10,3 @@
 ##output "iam_role" {
 #  value = module.iam_role.arn
 #}
-
-output "eks_id" {
-  value = module.eks.cluster_name
-}

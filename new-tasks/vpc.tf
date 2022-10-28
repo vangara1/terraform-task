@@ -11,9 +11,8 @@ locals {
 
 module "vpc" {
   source                 = "terraform-aws-modules/vpc/aws"
-  count                  = length(local.azs)
   name                   = "${local.name}-vpc"
-  azs                    = element(local.azs, count.index)
+  azs                    = local.azs
   cidr                   = local.cidr
   private_subnets        = local.private_subnets
   public_subnets         = local.public_subnets

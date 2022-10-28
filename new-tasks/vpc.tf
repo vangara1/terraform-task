@@ -13,8 +13,8 @@ module "vpc" {
   name                   = local.name
   azs                    = local.azs
   cidr                   = local.cidr
-  private_subnets        = local.private_subnets[count.index]
-  public_subnets         = local.public_subnets[count.index]
+  private_subnets        = local.private_subnets
+  public_subnets         = local.public_subnets
   enable_dns_hostnames   = true
   enable_dns_support     = true
   enable_nat_gateway     = true

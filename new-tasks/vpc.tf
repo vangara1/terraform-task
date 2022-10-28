@@ -11,12 +11,12 @@ locals {
 
 module "vpc" {
   source                 = "terraform-aws-modules/vpc/aws"
-  count                  = length(local.private_subnets, local.public_subnets, local.azs)
+  count                  = length(local.azs)
   name                   = "${local.name}-vpc"
   azs                    = element(local.azs, count.index)
   cidr                   = local.cidr
-  private_subnets        = element(local.private_subnets, count.index)
-  public_subnets         = element(local.public_subnets, count.index)
+  private_subnets        = split(",", local.private_subnets)
+  public_subnets         = split(",", local.public_subnets)
   enable_dns_hostnames   = true
   enable_dns_support     = true
   enable_nat_gateway     = true

@@ -11,8 +11,13 @@ resource "aws_route_table" "route_table" {
   }
 }
 resource "aws_route_table_association" "route-table-a" {
-  count          = length(aws_subnet.subnet.*.id)
-  subnet_id      = aws_subnet.subnet[count.index].id
+  count          = length(aws_subnet.pub_subnet.*.id)
+  subnet_id      = aws_subnet.pub_subnet[count.index].id
   route_table_id = aws_route_table.route_table.id
 }
 
+resource "aws_route_table_association" "route-table-a" {
+  count          = length(aws_subnet.pvt-subnet.*.id)
+  subnet_id      = aws_subnet.pvt-subnet[count.index].id
+  route_table_id = aws_route_table.route_table.id
+}

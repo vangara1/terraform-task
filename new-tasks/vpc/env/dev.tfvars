@@ -1,0 +1,9 @@
+ENV                    = "dev"
+VPC_CIDR               = "170.1.0.0/16"
+VPC_CIDR_ADDON         = ["170.255.0.0/24"]
+PRIVATE_SUBNETS        = ["170.1.0.0/17", "170.1.128.0/17"]
+PUBLIC_SUBNETS         = ["170.255.0.0/25", "170.255.0.128/25"]
+AZS                    = ["us-east-1c", "us-east-1d"]
+VPC_DEFAULT_ID         = "vpc-078a65ec215c92579"
+DEFAULT_VPC_CIDR       = "172.31.0.0/16"
+INTERNAL_HOSTEDZONE_ID = "Z0659015OB7PKCI93ZBC"

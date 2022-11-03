@@ -1,0 +1,9 @@
+variable "ENV" {}
+variable "VPC_CIDR" {}
+variable "VPC_CIDR_ADDON" {}
+variable "PRIVATE_SUBNETS" {}
+variable "PUBLIC_SUBNETS" {}
+variable "AZS" {}
+variable "VPC_DEFAULT_ID" {}
+variable "DEFAULT_VPC_CIDR" {}
+variable "INTERNAL_HOSTEDZONE_ID" {}

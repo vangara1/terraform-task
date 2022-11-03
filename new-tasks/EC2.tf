@@ -3,6 +3,6 @@ resource "aws_instance" "instance" {
   instance_type               = "t2.micro"
   associate_public_ip_address = true
   key_name                    = "fresh"
-  vpc_security_group_ids      = [aws_vpc.vpc.id]
+  vpc_security_group_ids      = aws_security_group.sg.id
   subnet_id                   = aws_subnet.pub_subnet.*.id[0]
 }

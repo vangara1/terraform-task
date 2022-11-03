@@ -5,5 +5,5 @@ resource "aws_instance" "instance" {
   key_name                    = "fresh"
   vpc_security_group_ids      = [aws_vpc.vpc.id]
   subnet_id                   = [aws_subnet.pub_subnet[count.index].id]
-
+  count = var.public_subnet
 }

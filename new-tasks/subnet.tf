@@ -6,7 +6,7 @@ resource "aws_subnet" "pub_subnet" {
   enable_resource_name_dns_a_record_on_launch = true
   map_public_ip_on_launch                     = "true"
   tags = {
-    Name = "${var.NAME}-pub-subnet"
+    Name = "${element(var.NAME, count.index)}-pub-subnet"
   }
 }
 
@@ -18,7 +18,7 @@ resource "aws_subnet" "pvt-subnet" {
   enable_resource_name_dns_a_record_on_launch = true
 
   tags = {
-    Name = "${var.NAME}-pvt-subnet"
+    Name = "${element(var.NAME, count.index)}-pvt-subnet"
   }
 }
 

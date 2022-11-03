@@ -4,6 +4,5 @@ resource "aws_instance" "instance" {
   associate_public_ip_address = true
   key_name                    = "fresh"
   vpc_security_group_ids      = [aws_vpc.vpc.id]
-  subnet_id                   = [aws_subnet.pub_subnet[count.index[0]].id]
-  count = var.public_subnet
+  subnet_id                   = aws_subnet.pub_subnet.id[1]
 }

@@ -1,9 +1,7 @@
-data "aws_region" "current" {}
 
 resource "aws_vpc" "main" {
   cidr_block       = "16.0.0.0/16"
   instance_tenancy = "default"
-  region_name = data.aws_region.current.name
   enable_dns_hostnames  = true
 
 tags = {

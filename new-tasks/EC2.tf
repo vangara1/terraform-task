@@ -4,6 +4,6 @@ resource "aws_instance" "instance" {
   associate_public_ip_address = true
   availability_zone           = var.az[0]
   key_name                    = "fresh"
-  security_groups             = [aws_security_group.sg.id]
+  subnet_id                   = aws_subnet.pub_subnet.id
   vpc_security_group_ids      = [aws_vpc.vpc.id]
 }

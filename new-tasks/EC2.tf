@@ -5,6 +5,6 @@ resource "aws_instance" "instance" {
   availability_zone           = var.az[0]
   key_name                    = "fresh"
   count                       = length(aws_subnet.pub_subnet)
-  subnet_id                   = aws_subnet.pub_subnet[count.index].id
+  subnet_id                   = aws_subnet.pub_subnet[0].id
   vpc_security_group_ids      = [aws_vpc.vpc.id]
 }

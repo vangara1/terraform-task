@@ -1,5 +1,5 @@
-resource "aws_subnet" "main" {
-  vpc_id                                         = aws_vpc.main.id
+resource "aws_subnet" "subnet" {
+  vpc_id                                         = aws_vpc.vpc.id
   count                                          = length(var.public_subnet)
   cidr_block                                     = element(var.public_subnet, count.index )
   availability_zone                              = element(var.az, count.index)

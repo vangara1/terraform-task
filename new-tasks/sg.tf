@@ -1,4 +1,5 @@
 resource "aws_security_group" "sg" {
+  name = "${var.NAME}-sg"
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_vpc.vpc.id
 

@@ -10,6 +10,7 @@ resource "aws_route_table" "route_table" {
     Name ="${var.NAME}-route-table"
   }
 }
+
 resource "aws_route_table_association" "route-table-pub" {
   count          = length(aws_subnet.pub_subnet.*.id)
   subnet_id      = aws_subnet.pub_subnet[count.index].id

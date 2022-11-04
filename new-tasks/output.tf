@@ -17,6 +17,9 @@ output "PRIVATE_SUBNET_CIDR" {
 output "PUBLIC_SUBNET_CIDR" {
   value = aws_subnet.pub_subnet.*.cidr_block
 }
+output "public_ip" {
+  value = aws_instance.instance.public_ip
+}
 
 #
 #output "INTERNAL_HOSTEDZONE_ID" {

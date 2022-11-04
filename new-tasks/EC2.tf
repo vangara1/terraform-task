@@ -111,14 +111,8 @@ resource "aws_instance" "instance" {
     private_key = tls_private_key.key.private_key_pem
   }
 
-
-
   provisioner "remote-exec" {
-    inline = ["sudo yum install docker -y",
-      "sudo systemctl start docker",
-      "sudo systemctl enable docker",
-      "sudo docker pull centos:latest"]
-
+    inline = ["bash setup.sh"]
   }
   tags = {
     Name = "${var.NAME}"

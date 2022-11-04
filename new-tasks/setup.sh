@@ -1,5 +1,4 @@
 #!/bin/bash
-sudo su -
 sudo yum install -y yum-utils
 sudo yum-config-manager \
 --add-repo \

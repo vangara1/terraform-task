@@ -37,10 +37,12 @@ resource "aws_key_pair" "my_key" {
 resource "null_resource" "kubernetes" {
   provisioner "remote-exec" {
     inline = ["cloud-init status --wait"]
-    command = ["bash /root/terraform-task/new-tasks/setup.sh"]
   }
-
-
+    provisioner "local-exec" {
+      command = <<-EOT
+      sudo bash /root/terraform-task/new-tasks/setup.sh
+    EOT
+    }
   # Login to the centos-user with the aws key.
   connection {
     type        = "ssh"

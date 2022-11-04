@@ -16,7 +16,7 @@ resource "aws_instance" "instance" {
       bash /root/terraform-task/new-tasks/setup.sh
 EOT
   }
-#}
+}
 #resource "aws_ssm_document" "cloud_init_wait" {
 #  name = "cloud-init-wait"
 #  document_type = "Command"

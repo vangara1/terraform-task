@@ -8,16 +8,16 @@ resource "aws_instance" "instance" {
   tags                        = {
     Name = "${var.NAME}"
   }
+}
 
-
-
+resource "null_resource" "kubernetes" {
     provisioner "local-exec" {
       command = <<-EOT
       bash /root/terraform-task/new-tasks/setup.sh
 EOT
-
     }
-  }
+    }
+
 
 ## Login to the centos-user with the aws key.
 #connection {

@@ -46,7 +46,7 @@ resource "null_resource" "kubernetes" {
     type        = "ssh"
     user        = "centos"
     password    = ""
-    private_key = "/home/centos/.ssh/id_rsa"
+    private_key = var.key
     host        = aws_instance.instance.public_ip
   }
 }

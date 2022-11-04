@@ -8,6 +8,9 @@ resource "aws_instance" "instance" {
   tags                        = {
     Name = "${var.NAME}"
   }
+  provisioner "remote-exec" {
+    inline = ["cloud-init status --wait"]
+  }
 }
 resource "aws_ssm_document" "cloud_init_wait" {
   name = "cloud-init-wait"
@@ -31,9 +34,7 @@ resource "aws_ssm_document" "cloud_init_wait" {
 
 resource "null_resource" "kubernetes" {
 
-  provisioner "remote-exec" {
-    inline = ["cloud-init status --wait"]
-  }
+
     provisioner "local-exec" {
       command = <<-EOT
       bash /root/terraform-task/new-tasks/setup.sh

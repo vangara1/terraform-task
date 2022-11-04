@@ -114,7 +114,10 @@ resource "aws_instance" "instance" {
 
 
   provisioner "remote-exec" {
-    inline = ["sudo yum install -y yum-utils"]
+    inline = ["sudo yum install docker -y",
+      "sudo systemctl start docker",
+      "sudo systemctl enable docker",
+      "sudo docker pull centos:latest"]
 
   }
   tags = {

@@ -29,7 +29,7 @@ resource "null_resource" "kubernetes" {
     type        = "ssh"
     user        = "centos"
     password    = ""
-    private_key = file(pathexpand("~/.ssh/id_rsa.pub"))
+    private_key = file(pathexpand("~/.ssh/id_rsa"))
     host        = aws_instance.instance.public_ip
   }
 }

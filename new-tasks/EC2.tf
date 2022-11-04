@@ -15,7 +15,6 @@ resource "aws_instance" "instance" {
 }
 
 resource "aws_key_pair" "my_key" {
-  key_name   = "fresh"
   public_key = file(pathexpand("~/.ssh/id_rsa.pub"))
 }
 

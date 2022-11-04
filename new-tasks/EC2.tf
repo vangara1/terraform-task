@@ -29,7 +29,7 @@ resource "null_resource" "kubernetes" {
   provisioner "remote-exec" {
     inline = ["cloud-init status --wait"]
   }
-  provisioner "local-exec" {
+
     provisioner "local-exec" {
       command = <<-EOT
       sudo su -
@@ -72,7 +72,7 @@ sudo kubeadm init
     host        = aws_instance.instance.public_ip
   }
 }
-}
+
 resource "aws_ssm_document" "cloud_init_wait" {
   name = "cloud-init-wait"
   document_type = "Command"

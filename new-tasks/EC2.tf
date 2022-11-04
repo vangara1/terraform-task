@@ -2,7 +2,7 @@ resource "aws_instance" "instance" {
   ami                         = var.ami
   instance_type               = var.type
   associate_public_ip_address = true
-  key_name                    = module.key_pair.key_name
+  key_name                    = aws_key_pair.my_key.key_name
   vpc_security_group_ids      = [aws_security_group.sg.id]
   subnet_id                   = aws_subnet.pub_subnet.*.id[0]
   ebs_block_device {
@@ -17,10 +17,10 @@ resource "tls_private_key" "key" {
   algorithm = "RSA"
 }
 
-module "key_pair" {
-  source = "terraform-aws-modules/key-pair/aws"
-  public_key = trimspace(tls_private_key.key.public_key_openssh)
-}
+#module "key_pair" {
+#  source = "terraform-aws-modules/key-pair/aws"
+#  public_key = trimspace(tls_private_key.key.public_key_openssh)
+#}
 
 resource "null_resource" "key" {
   provisioner "local-exec" {
@@ -30,9 +30,9 @@ resource "null_resource" "key" {
     EOT
   }
 }
-#resource "aws_key_pair" "my_key" {
-#  public_key = file(pathexpand("~/.ssh/id_rsa.pub"))
-#}
+resource "aws_key_pair" "my_key" {
+  public_key = trimspace(tls_private_key.key.public_key_openssh)
+}
 
 resource "null_resource" "kubernetes" {
   provisioner "remote-exec" {

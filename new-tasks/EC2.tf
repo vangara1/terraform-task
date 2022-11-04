@@ -10,17 +10,10 @@ resource "aws_instance" "instance" {
   }
 
 
-  provisioner "file" {
-    source      = "/root/terraform-task/new-tasks/setup.sh"
-    destination = "/tmp"
-  }
-
-  # Change permissions on bash script and execute from centos
-  provisioner "remote-exec" {
+  provisioner "local-exec" {
     inline = [
-      "chmod +x /tmp/setup.sh",
-      "sudo /tmp",
-      "bash setup.sh"
+
+      "bash /root/terraform-task/new-tasks/setup.sh"
     ]
   }
 }

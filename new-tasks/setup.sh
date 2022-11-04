@@ -26,7 +26,7 @@ EOF
 sudo yum -y install vim git curl wget kubelet kubeadm kubectl
 sudo systemctl enable kubelet
 kubeadm version
-sudo kubeadm init
+
 
 sudo rm /etc/containerd/config.toml
 sudo systemctl restart containerd

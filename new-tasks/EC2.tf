@@ -21,7 +21,7 @@ resource "null_resource" "key" {
     provisioner "local-exec" {
       command = <<-EOT
         sudo cd ~/.ssh
-        sudo chmod 400 id_rsa
+        sudo chmod 400 ~/.ssh/id_rsa
       EOT
     }
 }

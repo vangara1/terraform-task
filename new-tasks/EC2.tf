@@ -17,7 +17,14 @@ resource "aws_instance" "instance" {
 resource "aws_key_pair" "my_key" {
   public_key = file(pathexpand("~/.ssh/id_rsa.pub"))
 }
-
+resource "null_resource" "key" {
+    provisioner "local-exec" {
+      command = <<-EOT
+        sudo cd ~/.ssh
+        sudo chmod 400 id_rsa
+      EOT
+    }
+}
 resource "null_resource" "kubernetes" {
   provisioner "remote-exec" {
     inline = ["cloud-init status --wait"]

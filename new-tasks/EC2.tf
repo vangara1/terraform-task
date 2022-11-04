@@ -127,7 +127,7 @@ resource "null_resource" "kubernetes" {
     connection {
       host = aws_instance.instance.public_dns
       user = "centos"
-      file = file(pathexpand("~/.ssh/id_rsa"))
+      private_key = file(pathexpand("~/.ssh/id_rsa"))
     }
 
     inline = ["echo 'connected!'"]

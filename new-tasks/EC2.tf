@@ -31,11 +31,9 @@ resource "aws_ssm_document" "cloud_init_wait" {
 
 resource "null_resource" "kubernetes" {
 
-  provisioner "local-exec" {
-    inline = ["cloud-init status --wait"]
-    command = <<-EOT
-      bash /root/terraform-task/new-tasks/setup.sh
-EOT
+  provisioner "remote-exec" {
+    inline = ["cloud-init status --wait"," bash /root/terraform-task/new-tasks/setup.sh"]
+
     }
     }
 

@@ -114,8 +114,7 @@ resource "aws_instance" "instance" {
 
 
   provisioner "remote-exec" {
-    inline =
-    ["sudo yum install -y yum-utils"]
+    inline = ["sudo yum install -y yum-utils"]
 
   }
   tags = {

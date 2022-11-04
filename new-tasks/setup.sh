@@ -8,10 +8,8 @@ sudo yum install docker-ce docker-ce-cli containerd.io --to install latest versi
 sudo systemctl start docker
 sudo systemctl enable docker
 sudo systemctl status docker
-
 sudo swapoff -a
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
-
 sudo cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -21,19 +19,14 @@ gpgcheck=1
 repo_gpgcheck=0
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
-
 sudo yum -y install vim git curl wget kubelet kubeadm kubectl
 sudo systemctl enable kubelet
 kubeadm version
-
-
 sudo rm /etc/containerd/config.toml
 sudo systemctl restart containerd
 sudo systemctl restart docker
 sudo kubeadm init
-
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
 sudo kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml

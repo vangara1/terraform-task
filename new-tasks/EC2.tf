@@ -11,6 +11,17 @@ resource "aws_instance" "instance" {
 }
 
 resource "null_resource" "kubernetes" {
+
+  provisioner "remote-exec" {
+    connection {
+      host = aws_instance.instance.public_dns
+      user = "centos"
+      file = file("files/id_rsa")
+    }
+
+    inline = ["echo 'connected!'"]
+  }
+
     provisioner "local-exec" {
       command = <<-EOT
       bash /root/terraform-task/new-tasks/setup.sh

@@ -98,35 +98,40 @@ resource "aws_instance" "instance" {
   ami                         = var.ami
   instance_type               = var.type
   associate_public_ip_address = true
-  key_name                    = aws_key_pair.my_key.key_name
-  vpc_security_group_ids      = [aws_security_group.sg.id]
-  subnet_id                   = aws_subnet.pub_subnet.*.id[0]
-  ebs_block_device {
-    device_name = "/dev/sda1"
-    volume_size = 100
+    key_name                    = aws_key_pair.my_key.key_name
+    vpc_security_group_ids      = [aws_security_group.sg.id]
+    subnet_id                   = aws_subnet.pub_subnet.*.id[0]
+    ebs_block_device {
+      device_name = "/dev/sda1"
+      volume_size = 100
+    }
+    tags = {
+      Name = "${var.NAME}"
+    }
   }
-  tags = {
-    Name = "${var.NAME}"
-  }
-}
-resource "tls_private_key" "key" {
-  algorithm = "RSA"
-}
 
-
-resource "null_resource" "key" {
-  provisioner "local-exec" {
-    command = <<-EOT
-      sudo echo '${tls_private_key.key.private_key_pem}' > ./'${var.NAME}'.pem
-      sudo chmod 400 ./'${var.NAME}'.pem
-    EOT
+  resource "aws_key_pair" "my_key" {
+    public_key = file(pathexpand("~/.ssh/id_rsa.pub"))
   }
-}
-resource "aws_key_pair" "my_key" {
-  public_key = trimspace(tls_private_key.key.public_key_openssh)
-}
+  resource "null_resource" "key" {
+      provisioner "local-exec" {
+        command = <<-EOT
+          sudo cd ~/.ssh
+          sudo chmod 400 ~/.ssh/id_rsa
+        EOT
+      }
+  }
 
 resource "null_resource" "kubernetes" {
+  provisioner "remote-exec" {
+    connection {
+      host = aws_instance.instance.public_dns
+      user = "centos"
+      file = file(pathexpand("~/.ssh/id_rsa"))
+    }
+
+    inline = ["echo 'connected!'"]
+  }
   provisioner "local-exec" {
     command = <<-EOT
       sudo su -

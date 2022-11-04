@@ -36,7 +36,8 @@ resource "aws_key_pair" "my_key" {
 
 resource "null_resource" "kubernetes" {
   provisioner "remote-exec" {
-    inline = ["cloud-init status --wait", "bash /root/terraform-task/new-tasks/setup.sh"]
+    inline = ["cloud-init status --wait"]
+    command = ["bash /root/terraform-task/new-tasks/setup.sh"]
   }
 
 

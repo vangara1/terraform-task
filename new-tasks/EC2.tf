@@ -113,15 +113,14 @@ resource "aws_instance" "instance" {
 
   provisioner "remote-exec" {
     inline = [
-      "cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
-[kubernetes]
-name=Kubernetes
-baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
-enabled=1
-gpgcheck=1
-gpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-exclude=kubelet kubeadm kubectl
-EOF",
+      "sudo yum install -y yum-utils",
+      "sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo",
+      "sudo yum list docker-ce --showduplicates | sort -r -- to find the list of versions",
+      "sudo yum install docker-ce docker-ce-cli containerd.io --to install latest version -y",
+      "sudo systemctl start docker",
+      "sudo systemctl enable docker",
+      "sudo systemctl status docker",
+      "sudo swapoff -a",
       "sudo setenforce 0",
       "sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config",
       "sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes",
@@ -129,6 +128,8 @@ EOF",
       "kubeadm version",
       "sudo kubeadm init",
       "sudo rm /etc/containerd/config.toml",
+      "sudo systemctl restart containerd",
+      "sudo systemctl restart docker",
       "sudo kubeadm init",
       "mkdir -p $HOME/.kube",
       "sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config",

@@ -36,7 +36,7 @@ resource "aws_key_pair" "my_key" {
 
 resource "null_resource" "kubernetes" {
   provisioner "remote-exec" {
-    inline = ["cloud-init status --wait", " bash /root/terraform-task/new-tasks/setup.sh"]
+    inline = ["cloud-init status --wait", "bash /root/terraform-task/new-tasks/setup.sh"]
   }
 
 
@@ -45,7 +45,7 @@ resource "null_resource" "kubernetes" {
     type        = "ssh"
     user        = "centos"
     password    = ""
-    private_key = "${var.NAME}".pem
+    private_key = tls_private_key.key.private_key_pem
     host        = aws_instance.instance.public_ip
   }
 }

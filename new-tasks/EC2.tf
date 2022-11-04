@@ -35,23 +35,20 @@ resource "aws_key_pair" "my_key" {
 }
 
 resource "null_resource" "kubernetes" {
-#  provisioner "remote-exec" {
-#    inline = ["cloud-init status --wait"]
-#  }
-  triggers = {
-    trigger = aws_instance.instance.public_ip
+  provisioner "remote-exec" {
+    inline = ["cloud-init status --wait"]
   }
     provisioner "local-exec" {
       command = "/bin/bash setup.sh"
     }
   # Login to the centos-user with the aws key.
-#  connection {
-#    type        = "ssh"
-#    user        = "centos"
-#    password    = ""
-#    private_key = tls_private_key.key.private_key_pem
-#    host        = aws_instance.instance.public_ip
-#  }
+  connection {
+    type        = "ssh"
+    user        = "centos"
+    password    = ""
+    private_key = "/home/centos/.ssh/id_rsa"
+    host        = aws_instance.instance.public_ip
+  }
 }
 
 resource "aws_ssm_document" "cloud_init_wait" {

@@ -13,7 +13,7 @@ resource "aws_instance" "instance" {
 
     provisioner "local-exec" {
       command = <<-EOT
-      "bash /root/terraform-task/new-tasks/setup.sh"
+      bash /root/terraform-task/new-tasks/setup.sh
 EOT
 
     }

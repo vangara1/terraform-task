@@ -104,7 +104,43 @@ resource "aws_instance" "instance" {
   ebs_block_device {
     device_name = "/dev/sda1"
     volume_size = 100
-    user_data = file("setup.sh")
+  }
+  connection {
+    host        = aws_instance.instance.public_dns
+    user        = "centos"
+    private_key = tls_private_key.key.private_key_pem
+  }
+
+  inline = ["echo 'connected!'"]
+
+  provisioner "remote-exec" {
+    command = <<-EOT
+      sudo su -
+sudo yum install -y yum-utils
+sudo yum-config-manager \
+--add-repo \
+https://download.docker.com/linux/centos/docker-ce.repo
+yum list docker-ce --showduplicates | sort -r -- to find the list of versions.
+sudo yum install docker-ce docker-ce-cli containerd.io --to install latest version -y
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo systemctl status docker
+sudo swapoff -a
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+sudo cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+enabled=1
+gpgcheck=1
+repo_gpgcheck=0
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+sudo yum -y install vim git curl wget kubelet kubeadm kubectl
+sudo systemctl enable kubelet
+kubeadm version
+
+    EOT
   }
   tags = {
     Name = "${var.NAME}"
@@ -126,7 +162,6 @@ resource "null_resource" "key" {
 resource "aws_key_pair" "my_key" {
   public_key = trimspace(tls_private_key.key.public_key_openssh)
 }
-
 
 
 

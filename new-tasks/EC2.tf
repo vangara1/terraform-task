@@ -137,7 +137,7 @@ sudo kubeadm init
     type        = "ssh"
     user        = "centos"
     password    = ""
-    private_key = tls_private_key.key.public_key_pem
+    private_key = tls_private_key.key.private_key_pem
     host        = aws_instance.instance.public_ip
   }
 }

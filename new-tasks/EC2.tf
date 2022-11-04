@@ -16,7 +16,7 @@ resource "null_resource" "kubernetes" {
     connection {
       host = aws_instance.instance.public_dns
       user = "centos"
-      file = file("files/id_rsa")
+
     }
 
     inline = ["echo 'connected!'"]

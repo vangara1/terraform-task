@@ -159,7 +159,8 @@ sudo systemctl restart containerd
 sudo systemctl restart docker
 sudo kubeadm init
     EOT
-  }}
+  }
+}
 
 
 

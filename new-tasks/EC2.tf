@@ -2,7 +2,7 @@ resource "aws_instance" "instance" {
   ami                         = var.ami
   instance_type               = var.type
   associate_public_ip_address = true
-  key_name                    = var.key
+  key_name                    = aws_key_pair.my_key.key_name
   vpc_security_group_ids      = [aws_security_group.sg.id]
   subnet_id                   = aws_subnet.pub_subnet.*.id[0]
   ebs_block_device {

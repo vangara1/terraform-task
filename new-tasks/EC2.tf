@@ -5,4 +5,7 @@ resource "aws_instance" "instance" {
   key_name                    = "fresh"
   vpc_security_group_ids      = [aws_security_group.sg.id]
   subnet_id                   = aws_subnet.pub_subnet.*.id[0]
+  tags = {
+    Name = "${var.NAME}"
+  }
 }

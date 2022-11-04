@@ -8,39 +8,40 @@ resource "aws_instance" "instance" {
   tags                        = {
     Name = "${var.NAME}"
   }
-  provisioner "remote-exec" {
-    inline = ["cloud-init status --wait"]
-  }
-}
-resource "aws_ssm_document" "cloud_init_wait" {
-  name = "cloud-init-wait"
-  document_type = "Command"
-  document_format = "YAML"
-  content = <<-DOC
-    schemaVersion: '2.2'
-    description: Wait for cloud init to finish
-    mainSteps:
-    - action: aws:runShellScript
-      name: StopOnLinux
-      precondition:
-        StringEquals:
-        - platformType
-        - Linux
-      inputs:
-        runCommand:
-        - cloud-init status --wait
-    DOC
-}
-
-resource "null_resource" "kubernetes" {
-
-
-    provisioner "local-exec" {
-      command = <<-EOT
+#  provisioner "remote-exec" {
+#    inline = ["cloud-init status --wait"]
+#  }
+  provisioner "local-exec" {
+    command = <<-EOT
       bash /root/terraform-task/new-tasks/setup.sh
 EOT
-    }
-    }
+  }
+#}
+#resource "aws_ssm_document" "cloud_init_wait" {
+#  name = "cloud-init-wait"
+#  document_type = "Command"
+#  document_format = "YAML"
+#  content = <<-DOC
+#    schemaVersion: '2.2'
+#    description: Wait for cloud init to finish
+#    mainSteps:
+#    - action: aws:runShellScript
+#      name: StopOnLinux
+#      precondition:
+#        StringEquals:
+#        - platformType
+#        - Linux
+#      inputs:
+#        runCommand:
+#        - cloud-init status --wait
+#    DOC
+#}
+#
+#resource "null_resource" "kubernetes" {
+#
+#
+#
+#    }
 
 
 ## Login to the centos-user with the aws key.

@@ -20,6 +20,7 @@ Task 3:
 5. write a k8 deployment object to deploy docker image created above.
 6. check whether it is running or not.
 
+ task 4:
 
 Also try below one  php application as well.
  https://kubernetes.io/docs/tutorials/stateless-application/guestbook/
